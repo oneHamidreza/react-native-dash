@@ -30,13 +30,15 @@ const createDashStyleSheet = (
 }
 
 let stylesStore = {}
-export const getDashStyle = props => {
-  const isRow = isStyleRow(props.style)
-  const id = getDashStyleId(props, isRow)
+export const getDashStyle = ({
+                               dashGap, dashLength, dashThickness, dashColor,
+                               style, }) => {
+  const isRow = isStyleRow(style)
+  const id = getDashStyleId({dashGap, dashLength, dashThickness, dashColor}, isRow)
   if (!stylesStore[id]) {
     stylesStore = {
       ...stylesStore,
-      [id]: createDashStyleSheet(props, isRow),
+      [id]: createDashStyleSheet({dashGap, dashLength, dashThickness, dashColor}, isRow),
     }
   }
   return stylesStore[id]
